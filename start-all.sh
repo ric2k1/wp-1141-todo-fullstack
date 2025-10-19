@@ -13,10 +13,10 @@ echo "📦 Starting backend..."
 cd backend
 if [ ! -d "node_modules" ]; then
     echo "Installing backend dependencies..."
-    npm install
+    yarn install
 fi
-npx prisma migrate deploy > /dev/null 2>&1
-npm run dev &
+yarn prisma migrate deploy > /dev/null 2>&1
+yarn dev &
 BACKEND_PID=$!
 cd ..
 
@@ -28,9 +28,9 @@ echo "🎨 Starting frontend..."
 cd frontend
 if [ ! -d "node_modules" ]; then
     echo "Installing frontend dependencies..."
-    npm install
+    yarn install
 fi
-npm run dev &
+yarn dev &
 FRONTEND_PID=$!
 cd ..
 

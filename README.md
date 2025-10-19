@@ -22,6 +22,7 @@
 ## 🏗️ 技术栈
 
 ### 前端 (frontend/)
+
 - **React 19.1.1** - UI 框架
 - **TypeScript 5.9.3** - 类型安全
 - **Vite 7.1.2** - 构建工具
@@ -29,6 +30,7 @@
 - **CSS3** - 样式设计
 
 ### 后端 (backend/)
+
 - **Node.js** - 运行时环境
 - **Express 4.18** - Web 框架
 - **Prisma 5.0** - ORM
@@ -38,6 +40,7 @@
 - **tsx** - TypeScript 执行器
 
 ### 基础设施
+
 - **Nginx** - 反向代理
 - **Git** - 版本控制
 
@@ -62,6 +65,7 @@ todo-fullstack/
 │   ├── public/               # 静态资源
 │   ├── index.html
 │   ├── package.json
+│   ├── yarn.lock
 │   ├── tsconfig.json
 │   └── vite.config.ts
 │
@@ -77,6 +81,7 @@ todo-fullstack/
 │   ├── prisma/
 │   │   └── schema.prisma     # 数据库模型
 │   ├── package.json
+│   ├── yarn.lock
 │   ├── tsconfig.json
 │   └── .env                  # 环境变量
 │
@@ -93,31 +98,41 @@ todo-fullstack/
 ### 必需软件
 
 1. **Node.js** (>= 16.0)
+
    ```bash
    node --version  # 应显示 v16.0 或更高
    ```
 
-2. **npm** (通常随 Node.js 一起安装)
+2. **Yarn** (包管理器)
+
    ```bash
-   npm --version
+   # 安装 Yarn
+   npm install -g yarn
+   # 或使用 Homebrew (macOS)
+   brew install yarn
+   
+   # 验证安装
+   yarn --version
    ```
 
 3. **PostgreSQL** (>= 12.0)
+
    ```bash
    # macOS (使用 Homebrew)
    brew install postgresql
    brew services start postgresql
-   
+
    # 验证安装
    psql --version
    pg_isready
    ```
 
 4. **Nginx**
+
    ```bash
    # macOS (使用 Homebrew)
    brew install nginx
-   
+
    # 验证安装
    nginx -v
    ```
@@ -161,12 +176,12 @@ NODE_ENV=development
 ```bash
 # 后端依赖
 cd backend
-npm install
+yarn install
 cd ..
 
 # 前端依赖
 cd frontend
-npm install
+yarn install
 cd ..
 ```
 
@@ -174,7 +189,7 @@ cd ..
 
 ```bash
 cd backend
-npx prisma migrate dev --name init
+yarn prisma migrate dev --name init
 cd ..
 ```
 
@@ -187,6 +202,7 @@ cd ..
 ```
 
 这将依次启动：
+
 1. ✅ 检查 PostgreSQL 运行状态
 2. 📦 后端服务器 (http://localhost:3000)
 3. 🎨 前端开发服务器 (http://localhost:5173)
@@ -199,23 +215,27 @@ cd ..
 ### 方式二：单独启动
 
 #### 启动后端
+
 ```bash
 cd backend
-npm run dev
+yarn dev
 ```
 
 #### 启动前端
+
 ```bash
 cd frontend
-npm run dev
+yarn dev
 ```
 
 #### 启动 Nginx
+
 ```bash
 nginx -c $(pwd)/nginx.conf
 ```
 
 #### 停止 Nginx
+
 ```bash
 nginx -s stop
 ```
@@ -223,17 +243,20 @@ nginx -s stop
 ## 🔌 API 端点
 
 ### Base URL
+
 - 开发环境：`http://localhost:3000/api`
 - 通过 Nginx：`http://localhost:8080/api`
 
 ### 端点列表
 
 #### 获取所有 Todos
+
 ```http
 GET /api/todos
 ```
 
 **响应示例：**
+
 ```json
 [
   {
@@ -248,6 +271,7 @@ GET /api/todos
 ```
 
 #### 创建新 Todo
+
 ```http
 POST /api/todos
 Content-Type: application/json
@@ -261,6 +285,7 @@ Content-Type: application/json
 **响应：** `201 Created`
 
 #### 更新 Todo
+
 ```http
 PUT /api/todos/:id
 Content-Type: application/json
@@ -275,6 +300,7 @@ Content-Type: application/json
 **响应：** `200 OK` 或 `404 Not Found`
 
 #### 删除 Todo
+
 ```http
 DELETE /api/todos/:id
 ```
@@ -330,11 +356,13 @@ curl -X DELETE http://localhost:3000/api/todos/1
 本项目使用 Git tags 标记每个开发步骤，方便代码审查和学习：
 
 ### 查看所有 tags
+
 ```bash
 git tag -l
 ```
 
 ### 输出示例
+
 ```
 step-1-backend-init
 step-2-prisma-setup
@@ -348,16 +376,19 @@ step-9-final-testing
 ```
 
 ### 切换到特定步骤
+
 ```bash
 git checkout step-3-api-implementation
 ```
 
 ### 查看 tag 详细信息
+
 ```bash
 git show step-3-api-implementation
 ```
 
 ### 返回主分支
+
 ```bash
 git checkout main  # 或 master
 ```
@@ -381,6 +412,7 @@ git checkout main  # 或 master
 **问题：** `Error: connect ECONNREFUSED`
 
 **解决：**
+
 ```bash
 # 启动 PostgreSQL
 brew services start postgresql
@@ -394,6 +426,7 @@ pg_ctl -D /usr/local/var/postgres start
 **问题：** `Error: listen EADDRINUSE: address already in use`
 
 **解决：**
+
 ```bash
 # 查找占用端口的进程
 lsof -i :3000  # 后端
@@ -409,6 +442,7 @@ kill -9 <PID>
 **问题：** `nginx: [emerg] bind() to 0.0.0.0:8080 failed`
 
 **解决：**
+
 ```bash
 # 停止现有 Nginx
 nginx -s stop
@@ -422,14 +456,15 @@ pkill nginx
 **问题：** Prisma 迁移错误
 
 **解决：**
+
 ```bash
 cd backend
 
 # 重置数据库（注意：会删除所有数据）
-npx prisma migrate reset
+yarn prisma migrate reset
 
 # 重新迁移
-npx prisma migrate dev --name init
+yarn prisma migrate dev --name init
 ```
 
 ## 🔧 开发命令
@@ -440,18 +475,18 @@ npx prisma migrate dev --name init
 cd backend
 
 # 开发模式（热重载）
-npm run dev
+yarn dev
 
 # 构建
-npm run build
+yarn build
 
 # 生产运行
-npm start
+yarn start
 
 # Prisma 命令
-npx prisma studio          # 数据库 GUI
-npx prisma migrate dev     # 创建迁移
-npx prisma generate        # 生成客户端
+yarn prisma studio          # 数据库 GUI
+yarn prisma migrate dev     # 创建迁移
+yarn prisma generate        # 生成客户端
 ```
 
 ### 前端
@@ -460,16 +495,16 @@ npx prisma generate        # 生成客户端
 cd frontend
 
 # 开发模式
-npm run dev
+yarn dev
 
 # 构建
-npm run build
+yarn build
 
 # 预览构建
-npm run preview
+yarn preview
 
 # 代码检查
-npm run lint
+yarn lint
 ```
 
 ## 📦 生产部署
@@ -479,22 +514,24 @@ npm run lint
 ```bash
 # 后端
 cd backend
-npm run build
+yarn build
 
 # 前端
 cd frontend
-npm run build
+yarn build
 ```
 
 ### 配置生产环境
 
 1. 修改 `backend/.env`：
+
    ```env
    NODE_ENV=production
    DATABASE_URL="your-production-database-url"
    ```
 
 2. 配置 Nginx 使用生产构建：
+
    ```nginx
    location / {
        root /path/to/frontend/dist;
@@ -504,7 +541,7 @@ npm run build
 
 3. 使用 PM2 管理后端进程：
    ```bash
-   npm install -g pm2
+   yarn global add pm2
    pm2 start backend/dist/index.js --name todo-backend
    ```
 
