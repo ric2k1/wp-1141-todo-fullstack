@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { PrismaClient } from '@prisma/client';
+import todoRoutes from './routes/todoRoutes.js';
 
 dotenv.config();
 
@@ -21,6 +22,9 @@ app.get('/', (req: Request, res: Response) => {
     timestamp: new Date().toISOString()
   });
 });
+
+// API Routes
+app.use('/api', todoRoutes);
 
 // Test database connection
 async function connectDatabase() {
