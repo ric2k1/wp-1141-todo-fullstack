@@ -3,7 +3,9 @@ export interface Todo {
   text: string;
   description: string;
   completed: boolean;
-  expanded: boolean;
+  expanded: boolean;  // 仅前端使用，不发送到后端
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export type AddTodoHandler = (todo: Todo) => void;
