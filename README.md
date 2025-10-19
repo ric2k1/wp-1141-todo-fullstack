@@ -1,213 +1,525 @@
-# 📝 React Todo App with Components (v3 - 重構版)
+# 📝 Todo Fullstack Application
 
-一個使用 React Functional Components 構建的現代化待辦事項管理應用程式，採用**組件獨立性設計**，具有簡潔的 UI 設計和直觀的用戶體驗。
+一个现代化的全栈 Todo 应用，使用 React + TypeScript + Express + PostgreSQL + Prisma + Nginx 构建。
 
-> **🔄 重構特色**：本版本將狀態管理推送到各個組件中，提高組件獨立性和可重用性，避免 props drilling 問題。
+## 🎯 项目简介
 
-## ✨ 功能特色
+这是一个功能完整的全栈待办事项管理应用，支持创建、查看、更新、删除 todos，所有数据持久化存储在 PostgreSQL 数据库中。
 
-### 🎯 核心功能
+### ✨ 特色功能
 
-- **新增待辦事項**：快速添加新的待辦項目
-- **詳細描述**：為每個待辦事項添加詳細描述
-- **完成狀態切換**：一鍵標記完成/未完成
-- **展開/收起描述**：點擊待辦事項查看詳細描述
-- **刪除功能**：移除不需要的待辦事項
-- **鍵盤快捷鍵**：支援 Enter 鍵快速添加
+- 🎨 现代化 React 前端（TypeScript）
+- 🚀 Express RESTful API 后端
+- 🗄️ PostgreSQL 数据库
+- 🔍 Prisma ORM
+- ✅ Zod 数据验证
+- 🌐 Nginx 反向代理
+- 📦 一键启动所有服务
+- 💾 数据持久化
+- 🎭 Loading 和错误状态处理
+- 🔄 热更新支持
 
-### 🎨 UI/UX 特色
+## 🏗️ 技术栈
 
-- **簡潔設計**：採用極簡主義設計風格
-- **響應式布局**：適配不同螢幕尺寸
-- **直觀互動**：清晰的視覺回饋和動畫效果
-- **自定義滾動條**：美觀的滾動條樣式
-- **懸停效果**：按鈕和列表項目的懸停動畫
+### 前端 (frontend/)
+- **React 19.1.1** - UI 框架
+- **TypeScript 5.9.3** - 类型安全
+- **Vite 7.1.2** - 构建工具
+- **Axios** - HTTP 客户端
+- **CSS3** - 样式设计
 
-## 🏗️ 技術架構
+### 后端 (backend/)
+- **Node.js** - 运行时环境
+- **Express 4.18** - Web 框架
+- **Prisma 5.0** - ORM
+- **PostgreSQL** - 数据库
+- **Zod 3.22** - 数据验证
+- **TypeScript 5.3** - 类型安全
+- **tsx** - TypeScript 执行器
 
-### 前端技術棧
+### 基础设施
+- **Nginx** - 反向代理
+- **Git** - 版本控制
 
-- **React 19.1.1** - 現代化 UI 框架
-- **Vite 7.1.2** - 快速建構工具
-- **ESLint** - 代碼品質檢查
-- **CSS3** - 現代化樣式設計
-
-### 組件架構
+## 📁 项目结构
 
 ```
-src/
-├── components/           # 模組化組件
-│   ├── AddTodo.jsx      # 新增待辦事項組件
-│   ├── TodoItem.jsx     # 單個待辦事項組件
-│   └── TodoList.jsx     # 待辦事項列表組件
-├── App.jsx              # 主應用組件
-├── App.css              # 主樣式檔案
-└── main.jsx             # 應用程式入口點
+todo-fullstack/
+├── frontend/                 # 前端应用
+│   ├── src/
+│   │   ├── components/       # React 组件
+│   │   │   ├── AddTodo.tsx
+│   │   │   ├── TodoItem.tsx
+│   │   │   └── TodoList.tsx
+│   │   ├── hooks/            # 自定义 Hooks
+│   │   │   └── useAddTodoForm.ts
+│   │   ├── services/         # API 服务层
+│   │   │   └── api.ts
+│   │   ├── types/            # TypeScript 类型
+│   │   │   └── todo.ts
+│   │   ├── App.tsx           # 主应用组件
+│   │   └── main.tsx          # 应用入口
+│   ├── public/               # 静态资源
+│   ├── index.html
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── vite.config.ts
+│
+├── backend/                  # 后端应用
+│   ├── src/
+│   │   ├── controllers/      # 业务逻辑
+│   │   │   └── todoController.ts
+│   │   ├── routes/           # API 路由
+│   │   │   └── todoRoutes.ts
+│   │   ├── validators/       # Zod 验证
+│   │   │   └── todoSchemas.ts
+│   │   └── index.ts          # 服务器入口
+│   ├── prisma/
+│   │   └── schema.prisma     # 数据库模型
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── .env                  # 环境变量
+│
+├── nginx.conf                # Nginx 配置
+├── start-all.sh              # 启动脚本
+├── stop-all.sh               # 停止脚本
+└── README.md                 # 项目文档
 ```
 
-## 🚀 快速開始
+## 🚀 前置要求
 
-### 環境要求
+在开始之前，请确保您的系统已安装以下软件：
 
-- Node.js 16.0 或更高版本
-- npm 或 yarn 包管理器
+### 必需软件
 
-### 安裝步驟
-
-1. **克隆專案**
-
+1. **Node.js** (>= 16.0)
    ```bash
-   git clone https://github.com/ric2k1/wp-1141-todo-app-react-components.git
-   cd wp-1141-todo-app-react-components
+   node --version  # 应显示 v16.0 或更高
    ```
 
-2. **安裝依賴**
-
+2. **npm** (通常随 Node.js 一起安装)
    ```bash
-   npm install
-   # 或
-   yarn install
+   npm --version
    ```
 
-3. **啟動開發服務器**
-
+3. **PostgreSQL** (>= 12.0)
    ```bash
-   npm run dev
-   # 或
-   yarn dev
+   # macOS (使用 Homebrew)
+   brew install postgresql
+   brew services start postgresql
+   
+   # 验证安装
+   psql --version
+   pg_isready
    ```
 
-4. **開啟瀏覽器**
-   訪問 `http://localhost:5173` 查看應用程式
+4. **Nginx**
+   ```bash
+   # macOS (使用 Homebrew)
+   brew install nginx
+   
+   # 验证安装
+   nginx -v
+   ```
 
-### 建構生產版本
+5. **Git**
+   ```bash
+   git --version
+   ```
+
+## 📥 安装步骤
+
+### 1. 克隆项目
 
 ```bash
-npm run build
-# 或
-yarn build
+git clone <repository-url>
+cd todo-fullstack
 ```
 
-## 📖 使用指南
+### 2. 创建数据库
 
-### 基本操作
+```bash
+createdb tododb
+```
 
-1. **新增待辦事項**
+### 3. 配置环境变量
 
-   - 在輸入框中輸入待辦事項標題
-   - 在描述框中輸入詳細描述（可選）
-   - 點擊 "add" 按鈕或按 Enter 鍵添加
+后端的 `.env` 文件应已存在于 `backend/` 目录，内容如下：
 
-2. **管理待辦事項**
+```env
+DATABASE_URL="postgresql://postgres@localhost:5432/tododb"
+PORT=3000
+NODE_ENV=development
+```
 
-   - 點擊核取方塊標記完成/未完成
-   - 點擊待辦事項文字展開/收起描述
-   - 點擊 "delete" 按鈕刪除項目
+如果您的 PostgreSQL 配置不同，请修改 `DATABASE_URL`。
 
-3. **鍵盤快捷鍵**
-   - `Enter`：在標題輸入框中快速添加
-   - `Ctrl + Enter`：在描述輸入框中快速添加
+### 4. 安装依赖
 
-### 組件說明
+依赖会在首次运行 `start-all.sh` 时自动安装，或手动安装：
 
-#### AddTodo 組件
+```bash
+# 后端依赖
+cd backend
+npm install
+cd ..
 
-- **獨立狀態管理**：管理自己的輸入框狀態（標題和描述）
-- **完整功能封裝**：包含新增待辦事項的完整邏輯
-- **鍵盤快捷鍵支援**：支援 Enter 和 Ctrl+Enter 快速添加
-- **組件間通信**：通過 onAddTodo prop 與 TodoList 通信
+# 前端依赖
+cd frontend
+npm install
+cd ..
+```
 
-#### TodoItem 組件
+### 5. 运行数据库迁移
 
-- **純展示組件**：專注於渲染單個待辦事項
-- **事件處理優化**：包含優化的事件處理函數
-- **Props 驅動**：通過 props 接收數據和回調函數
-- **可重用性高**：易於在其他項目中重用
+```bash
+cd backend
+npx prisma migrate dev --name init
+cd ..
+```
 
-#### TodoList 組件
+## 🎮 运行应用
 
-- **狀態管理中心**：管理所有待辦事項的狀態
-- **完整 CRUD 操作**：包含新增、刪除、切換完成狀態等功能
-- **Ref 暴露**：使用 forwardRef 和 useImperativeHandle 暴露方法
-- **組件整合**：整合 TodoItem 組件並處理分隔線
+### 方式一：一键启动（推荐）
 
-## 🎨 設計特色
+```bash
+./start-all.sh
+```
 
-### 視覺設計
+这将依次启动：
+1. ✅ 检查 PostgreSQL 运行状态
+2. 📦 后端服务器 (http://localhost:3000)
+3. 🎨 前端开发服务器 (http://localhost:5173)
+4. 🌐 Nginx 反向代理 (http://localhost:8080)
 
-- **配色方案**：採用簡潔的黑白配色，背景為米色 (#f5f5dc)
-- **字體**：使用 Arial 字體，確保跨平台一致性
-- **邊框**：所有元素使用 1px 黑色邊框，營造簡潔感
-- **圓角**：適度的圓角設計 (4px-8px) 增加現代感
+**访问应用**：在浏览器打开 http://localhost:8080
 
-### 互動設計
+**停止服务**：按 `Ctrl+C` 或运行 `./stop-all.sh`
 
-- **懸停效果**：按鈕和列表項目具有懸停背景色變化
-- **點擊回饋**：所有可點擊元素都有視覺回饋
-- **動畫過渡**：使用 CSS transition 提供流暢的動畫效果
+### 方式二：单独启动
 
-### 響應式設計
+#### 启动后端
+```bash
+cd backend
+npm run dev
+```
 
-- **最大寬度**：容器最大寬度 600px，居中顯示
-- **滾動處理**：列表區域支援垂直滾動
-- **自適應高度**：根據內容自動調整高度
+#### 启动前端
+```bash
+cd frontend
+npm run dev
+```
 
-## 🔧 開發指南
+#### 启动 Nginx
+```bash
+nginx -c $(pwd)/nginx.conf
+```
 
-### 代碼結構
+#### 停止 Nginx
+```bash
+nginx -s stop
+```
 
-- **組件獨立性**：每個組件管理自己的狀態，提高可重用性
-- **狀態分離**：狀態管理分散到各個組件中，避免 props drilling
-- **Ref 通信**：使用 useRef 和 forwardRef 進行組件間通信
-- **React Hooks**：使用 useState, useImperativeHandle 等現代 React 特性
-- **最佳實踐**：遵循 React 組件設計最佳實踐
+## 🔌 API 端点
 
-### 樣式管理
+### Base URL
+- 开发环境：`http://localhost:3000/api`
+- 通过 Nginx：`http://localhost:8080/api`
 
-- 使用 CSS 模組化設計
-- 採用 BEM 命名規範
-- 響應式設計原則
-- 自定義滾動條樣式
+### 端点列表
 
-### 性能優化
+#### 获取所有 Todos
+```http
+GET /api/todos
+```
 
-- **組件隔離**：狀態變更只影響相關組件，減少不必要的重新渲染
-- **Ref 通信**：避免 props drilling，提高組件間通信效率
-- **狀態本地化**：狀態管理更接近使用位置，提高代碼可讀性
-- **React 19 特性**：使用最新的 React 功能和 Hooks
-- **Vite 熱重載**：快速開發和調試體驗
+**响应示例：**
+```json
+[
+  {
+    "id": 1,
+    "text": "买菜",
+    "description": "晚上做饭用",
+    "completed": false,
+    "createdAt": "2024-01-01T10:00:00.000Z",
+    "updatedAt": "2024-01-01T10:00:00.000Z"
+  }
+]
+```
 
-## 📝 待辦事項數據結構
+#### 创建新 Todo
+```http
+POST /api/todos
+Content-Type: application/json
 
-```javascript
 {
-  id: number,           // 唯一識別符
-  text: string,         // 待辦事項標題
-  description: string,  // 詳細描述
-  completed: boolean,   // 完成狀態
-  expanded: boolean     // 描述展開狀態
+  "text": "买菜",
+  "description": "晚上做饭用"  // 可选
 }
 ```
 
-## 🤝 貢獻指南
+**响应：** `201 Created`
 
-1. Fork 本專案
-2. 創建功能分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交變更 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 開啟 Pull Request
+#### 更新 Todo
+```http
+PUT /api/todos/:id
+Content-Type: application/json
 
-## 📄 授權條款
+{
+  "text": "买菜和水果",           // 可选
+  "description": "晚上做饭用",    // 可选
+  "completed": true               // 可选
+}
+```
 
-本專案採用 MIT 授權條款 - 查看 [LICENSE](LICENSE) 檔案了解詳情。
+**响应：** `200 OK` 或 `404 Not Found`
 
-## 📞 聯絡資訊
+#### 删除 Todo
+```http
+DELETE /api/todos/:id
+```
 
-如有任何問題或建議，請透過以下方式聯絡：
+**响应：** `204 No Content` 或 `404 Not Found`
 
-- GitHub Issues: [專案 Issues 頁面](https://github.com/ric2k1/wp-1141-todo-app-react-components/issues)
-- 電子郵件: [您的聯絡信箱]
+## 🗄️ 数据库模型
+
+```prisma
+model Todo {
+  id          Int      @id @default(autoincrement())
+  text        String
+  description String   @default("")
+  completed   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+```
+
+## 🧪 测试
+
+### 测试后端 API
+
+```bash
+# 获取所有 todos
+curl http://localhost:3000/api/todos
+
+# 创建 todo
+curl -X POST http://localhost:3000/api/todos \
+  -H "Content-Type: application/json" \
+  -d '{"text":"Test Todo","description":"Test description"}'
+
+# 更新 todo
+curl -X PUT http://localhost:3000/api/todos/1 \
+  -H "Content-Type: application/json" \
+  -d '{"completed":true}'
+
+# 删除 todo
+curl -X DELETE http://localhost:3000/api/todos/1
+```
+
+### 测试前端
+
+1. 访问 http://localhost:8080
+2. 创建新的 todo
+3. 切换完成状态
+4. 点击 todo 展开描述
+5. 删除 todo
+6. 刷新页面确认数据持久化
+
+## 📚 Git Tags 使用说明
+
+本项目使用 Git tags 标记每个开发步骤，方便代码审查和学习：
+
+### 查看所有 tags
+```bash
+git tag -l
+```
+
+### 输出示例
+```
+step-1-backend-init
+step-2-prisma-setup
+step-3-api-implementation
+step-4-frontend-restructure
+step-5-api-service-layer
+step-6-frontend-integration
+step-7-nginx-config
+step-8-startup-scripts
+step-9-final-testing
+```
+
+### 切换到特定步骤
+```bash
+git checkout step-3-api-implementation
+```
+
+### 查看 tag 详细信息
+```bash
+git show step-3-api-implementation
+```
+
+### 返回主分支
+```bash
+git checkout main  # 或 master
+```
+
+### 各步骤说明
+
+1. **step-1-backend-init**: 后端项目初始化
+2. **step-2-prisma-setup**: Prisma 和数据库配置
+3. **step-3-api-implementation**: RESTful API 实现
+4. **step-4-frontend-restructure**: 前端目录重组
+5. **step-5-api-service-layer**: 前端 API 服务层
+6. **step-6-frontend-integration**: 前端后端集成
+7. **step-7-nginx-config**: Nginx 反向代理配置
+8. **step-8-startup-scripts**: 启动脚本
+9. **step-9-final-testing**: 最终测试和文档
+
+## 🐛 常见问题
+
+### PostgreSQL 连接失败
+
+**问题：** `Error: connect ECONNREFUSED`
+
+**解决：**
+```bash
+# 启动 PostgreSQL
+brew services start postgresql
+
+# 或
+pg_ctl -D /usr/local/var/postgres start
+```
+
+### 端口被占用
+
+**问题：** `Error: listen EADDRINUSE: address already in use`
+
+**解决：**
+```bash
+# 查找占用端口的进程
+lsof -i :3000  # 后端
+lsof -i :5173  # 前端
+lsof -i :8080  # Nginx
+
+# 终止进程
+kill -9 <PID>
+```
+
+### Nginx 启动失败
+
+**问题：** `nginx: [emerg] bind() to 0.0.0.0:8080 failed`
+
+**解决：**
+```bash
+# 停止现有 Nginx
+nginx -s stop
+
+# 或杀死所有 Nginx 进程
+pkill nginx
+```
+
+### 数据库迁移失败
+
+**问题：** Prisma 迁移错误
+
+**解决：**
+```bash
+cd backend
+
+# 重置数据库（注意：会删除所有数据）
+npx prisma migrate reset
+
+# 重新迁移
+npx prisma migrate dev --name init
+```
+
+## 🔧 开发命令
+
+### 后端
+
+```bash
+cd backend
+
+# 开发模式（热重载）
+npm run dev
+
+# 构建
+npm run build
+
+# 生产运行
+npm start
+
+# Prisma 命令
+npx prisma studio          # 数据库 GUI
+npx prisma migrate dev     # 创建迁移
+npx prisma generate        # 生成客户端
+```
+
+### 前端
+
+```bash
+cd frontend
+
+# 开发模式
+npm run dev
+
+# 构建
+npm run build
+
+# 预览构建
+npm run preview
+
+# 代码检查
+npm run lint
+```
+
+## 📦 生产部署
+
+### 构建应用
+
+```bash
+# 后端
+cd backend
+npm run build
+
+# 前端
+cd frontend
+npm run build
+```
+
+### 配置生产环境
+
+1. 修改 `backend/.env`：
+   ```env
+   NODE_ENV=production
+   DATABASE_URL="your-production-database-url"
+   ```
+
+2. 配置 Nginx 使用生产构建：
+   ```nginx
+   location / {
+       root /path/to/frontend/dist;
+       try_files $uri $uri/ /index.html;
+   }
+   ```
+
+3. 使用 PM2 管理后端进程：
+   ```bash
+   npm install -g pm2
+   pm2 start backend/dist/index.js --name todo-backend
+   ```
+
+## 📝 授权
+
+MIT License
+
+## 👥 贡献
+
+欢迎提交 Pull Request 或 Issue！
+
+## 📞 联系方式
+
+如有问题，请创建 GitHub Issue。
 
 ---
 
-⭐ 如果這個專案對您有幫助，請給我們一個 Star！
+⭐ 如果这个项目对您有帮助，请给一个 Star！
