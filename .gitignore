@@ -107,5 +107,8 @@ temp/
 *.sln
 *.sw?
 
-# Documentation files
+# Documentation and script files
 TYPESCRIPT_MIGRATION.md
+NGROK_MIGRATION.md
+convert_all.py
+convert_s2t.py
