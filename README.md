@@ -1,117 +1,116 @@
 # 📝 Todo Fullstack Application
 
-一个现代化的全栈 Todo 应用，使用 React + TypeScript + Express + PostgreSQL + Prisma + Nginx 构建。
+一個現代化的全端 Todo 應用，使用 React + TypeScript + Express + PostgreSQL + Prisma + ngrok 構建。
 
-## 🎯 项目简介
+## 🎯 專案簡介
 
-这是一个功能完整的全栈待办事项管理应用，支持创建、查看、更新、删除 todos，所有数据持久化存储在 PostgreSQL 数据库中。
+這是一個功能完整的全端待辦事項管理應用，支援建立、查看、更新、刪除 todos，所有資料持久化儲存在 PostgreSQL 資料庫中。**使用 ngrok 可以產生公開網址，分享給任何人存取！**
 
 ### ✨ 特色功能
 
-- 🎨 现代化 React 前端（TypeScript）
-- 🚀 Express RESTful API 后端
-- 🗄️ PostgreSQL 数据库
+- 🎨 現代化 React 前端（TypeScript）
+- 🚀 Express RESTful API 後端
+- 🗄️ PostgreSQL 資料庫
 - 🔍 Prisma ORM
-- ✅ Zod 数据验证
-- 🌐 Nginx 反向代理
-- 📦 一键启动所有服务
-- 💾 数据持久化
-- 🎭 Loading 和错误状态处理
-- 🔄 热更新支持
+- ✅ Zod 資料驗證
+- 🌍 **ngrok 公網隧道 - 一鍵產生公開網址**
+- 📦 一鍵啟動所有服務
+- 💾 資料持久化
+- 🎭 Loading 和錯誤狀態處理
+- 🏗️ 後端服務前端靜態檔案
 
-## 🏗️ 技术栈
+## 🏗️ 技術棧
 
 ### 前端 (frontend/)
 
 - **React 19.1.1** - UI 框架
-- **TypeScript 5.9.3** - 类型安全
-- **Vite 7.1.2** - 构建工具
-- **Axios** - HTTP 客户端
-- **CSS3** - 样式设计
+- **TypeScript 5.9.3** - 類型安全
+- **Vite 7.1.2** - 構建工具
+- **Axios** - HTTP 客戶端
+- **CSS3** - 樣式設計
 
-### 后端 (backend/)
+### 後端 (backend/)
 
-- **Node.js** - 运行时环境
+- **Node.js** - 運行時環境
 - **Express 4.18** - Web 框架
 - **Prisma 5.0** - ORM
-- **PostgreSQL** - 数据库
-- **Zod 3.22** - 数据验证
-- **TypeScript 5.3** - 类型安全
-- **tsx** - TypeScript 执行器
+- **PostgreSQL** - 資料庫
+- **Zod 3.22** - 資料驗證
+- **TypeScript 5.3** - 類型安全
+- **tsx** - TypeScript 執行器
 
-### 基础设施
+### 基礎設施
 
-- **Nginx** - 反向代理
+- **ngrok** - 公網隧道（產生公開網址）
 - **Git** - 版本控制
 
-## 📁 项目结构
+## 📁 專案結構
 
 ```
 todo-fullstack/
-├── frontend/                 # 前端应用
+├── frontend/                 # 前端應用
 │   ├── src/
-│   │   ├── components/       # React 组件
+│   │   ├── components/       # React 元件
 │   │   │   ├── AddTodo.tsx
 │   │   │   ├── TodoItem.tsx
 │   │   │   └── TodoList.tsx
-│   │   ├── hooks/            # 自定义 Hooks
+│   │   ├── hooks/            # 自訂 Hooks
 │   │   │   └── useAddTodoForm.ts
-│   │   ├── services/         # API 服务层
+│   │   ├── services/         # API 服務層
 │   │   │   └── api.ts
-│   │   ├── types/            # TypeScript 类型
+│   │   ├── types/            # TypeScript 類型
 │   │   │   └── todo.ts
-│   │   ├── App.tsx           # 主应用组件
-│   │   └── main.tsx          # 应用入口
-│   ├── public/               # 静态资源
+│   │   ├── App.tsx           # 主應用元件
+│   │   └── main.tsx          # 應用入口
+│   ├── public/               # 靜態資源
 │   ├── index.html
 │   ├── package.json
 │   ├── yarn.lock
 │   ├── tsconfig.json
 │   └── vite.config.ts
 │
-├── backend/                  # 后端应用
+├── backend/                  # 後端應用
 │   ├── src/
-│   │   ├── controllers/      # 业务逻辑
+│   │   ├── controllers/      # 業務邏輯
 │   │   │   └── todoController.ts
 │   │   ├── routes/           # API 路由
 │   │   │   └── todoRoutes.ts
-│   │   ├── validators/       # Zod 验证
+│   │   ├── validators/       # Zod 驗證
 │   │   │   └── todoSchemas.ts
-│   │   └── index.ts          # 服务器入口
+│   │   └── index.ts          # 伺服器入口（服務 API + 靜態檔案）
 │   ├── prisma/
-│   │   └── schema.prisma     # 数据库模型
+│   │   └── schema.prisma     # 資料庫模型
 │   ├── package.json
 │   ├── yarn.lock
 │   ├── tsconfig.json
-│   └── .env                  # 环境变量
+│   └── .env                  # 環境变量
 │
-├── nginx.conf                # Nginx 配置
-├── start-all.sh              # 启动脚本
-├── stop-all.sh               # 停止脚本
-└── README.md                 # 项目文档
+├── start-all.sh              # 啟動腳本（含 ngrok）
+├── stop-all.sh               # 停止腳本
+└── README.md                 # 專案檔案
 ```
 
-## 🚀 前置要求
+## 🚀 前置需求
 
-在开始之前，请确保您的系统已安装以下软件：
+在開始之前，請確保您的系統已安裝以下軟體：
 
-### 必需软件
+### 必需軟體
 
 1. **Node.js** (>= 16.0)
 
    ```bash
-   node --version  # 应显示 v16.0 或更高
+   node --version  # 應顯示 v16.0 或更高
    ```
 
-2. **Yarn** (包管理器)
+2. **Yarn** (套件管理器)
 
    ```bash
-   # 安装 Yarn
+   # 安裝 Yarn
    npm install -g yarn
    # 或使用 Homebrew (macOS)
    brew install yarn
-   
-   # 验证安装
+
+   # 驗證安裝
    yarn --version
    ```
 
@@ -122,19 +121,26 @@ todo-fullstack/
    brew install postgresql
    brew services start postgresql
 
-   # 验证安装
+   # 驗證安裝
    psql --version
    pg_isready
    ```
 
-4. **Nginx**
+4. **ngrok** （產生公開網址）
 
    ```bash
    # macOS (使用 Homebrew)
-   brew install nginx
+   brew install ngrok/ngrok/ngrok
 
-   # 验证安装
-   nginx -v
+   # 或下载安裝
+   # 存取: https://ngrok.com/download
+
+   # 驗證安裝
+   ngrok version
+
+   # 註冊并取得 authtoken（可選，免費版即可）
+   # 存取: https://dashboard.ngrok.com/signup
+   # ngrok config add-authtoken <你的token>
    ```
 
 5. **Git**
@@ -142,24 +148,24 @@ todo-fullstack/
    git --version
    ```
 
-## 📥 安装步骤
+## 📥 安裝步驟
 
-### 1. 克隆项目
+### 1. 複製專案
 
 ```bash
 git clone <repository-url>
 cd todo-fullstack
 ```
 
-### 2. 创建数据库
+### 2. 建立資料庫
 
 ```bash
 createdb tododb
 ```
 
-### 3. 配置环境变量
+### 3. 設定環境变量
 
-后端的 `.env` 文件应已存在于 `backend/` 目录，内容如下：
+後端的 `.env` 檔案應已存在于 `backend/` 目錄，內容如下：
 
 ```env
 DATABASE_URL="postgresql://postgres@localhost:5432/tododb"
@@ -167,25 +173,25 @@ PORT=3000
 NODE_ENV=development
 ```
 
-如果您的 PostgreSQL 配置不同，请修改 `DATABASE_URL`。
+如果您的 PostgreSQL 設定不同，請修改 `DATABASE_URL`。
 
-### 4. 安装依赖
+### 4. 安裝相依性
 
-依赖会在首次运行 `start-all.sh` 时自动安装，或手动安装：
+相依性會在首次運行 `start-all.sh` 时自動安裝，或手動安裝：
 
 ```bash
-# 后端依赖
+# 後端相依性
 cd backend
 yarn install
 cd ..
 
-# 前端依赖
+# 前端相依性
 cd frontend
 yarn install
 cd ..
 ```
 
-### 5. 运行数据库迁移
+### 5. 運行資料庫遷移
 
 ```bash
 cd backend
@@ -193,69 +199,150 @@ yarn prisma migrate dev --name init
 cd ..
 ```
 
-## 🎮 运行应用
+## 🎮 運行應用
 
-### 方式一：一键启动（推荐）
+### 方式一：一键啟動（推薦）
 
 ```bash
 ./start-all.sh
 ```
 
-这将依次启动：
+这將自動完成：
 
-1. ✅ 检查 PostgreSQL 运行状态
-2. 📦 后端服务器 (http://localhost:3000)
-3. 🎨 前端开发服务器 (http://localhost:5173)
-4. 🌐 Nginx 反向代理 (http://localhost:8080)
+1. ✅ 檢查 PostgreSQL 和 ngrok 安裝狀態
+2. 📦 安裝相依性（如果需要）
+3. 🏗️ 構建前端靜態檔案
+4. 📊 運行資料庫遷移
+5. 🚀 啟動後端服務器（服務 API + 前端）
+6. 🌍 啟動 ngrok 并產生公開網址
 
-**访问应用**：在浏览器打开 http://localhost:8080
+**啟動后你會看到：**
 
-**停止服务**：按 `Ctrl+C` 或运行 `./stop-all.sh`
-
-### 方式二：单独启动
-
-#### 启动后端
-
-```bash
-cd backend
-yarn dev
+```
+✅ Application started successfully!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📱 本地存取:  http://localhost:3000
+🌍 公開網址: https://xxxx-xx-xx-xxx-xxx.ngrok-free.app
+💡 分享這個網址，任何人都可以存取你的應用！
+🎛️  ngrok 控制台: http://localhost:4040
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
-#### 启动前端
+**存取方式：**
+
+- 本地存取：`http://localhost:3000`
+- 公開存取：使用 ngrok 產生的網址（分享給朋友）
+- ngrok 控制台：`http://localhost:4040`（查看請求日志）
+
+**停止服務**：按 `Ctrl+C` 或運行 `./stop-all.sh`
+
+### 方式二：單獨啟動
+
+如果你不需要公開網址，可以單獨啟動後端：
+
+#### 1. 構建前端
 
 ```bash
 cd frontend
+yarn install
+yarn build
+cd ..
+```
+
+#### 2. 啟動後端
+
+```bash
+cd backend
+yarn install
 yarn dev
 ```
 
-#### 启动 Nginx
+存取：`http://localhost:3000`
+
+#### 3. 手動啟動 ngrok（可選）
 
 ```bash
-nginx -c $(pwd)/nginx.conf
+ngrok http 3000
 ```
 
-#### 停止 Nginx
+## 🌐 ngrok 公開存取
 
-```bash
-nginx -s stop
+### 🎯 什么是 ngrok？
+
+ngrok 是一个強大的工具，可以將你本地運行的應用暴露到網際網路，產生一个公開的 HTTPS 網址。
+
+**優點：**
+
+- ✅ 无需购买域名或服務器
+- ✅ 自動提供 HTTPS 加密
+- ✅ 可以分享給世界各地的任何人
+- ✅ 免費版足够開發和演示使用
+- ✅ 内置請求檢查工具
+
+### 🚀 使用方式
+
+当你運行 `./start-all.sh` 时，ngrok 會自動啟動并顯示公開網址：
+
+```
+🌍 公開網址: https://abc123.ngrok-free.app
+💡 分享這個網址，任何人都可以存取你的應用！
 ```
 
-## 🔌 API 端点
+### 📊 ngrok 控制台
+
+存取 `http://localhost:4040` 可以查看：
+
+- 所有 HTTP 請求詳情
+- 請求/响應頭和資料
+- 請求時間和狀態码
+- 重放請求功能
+
+### ⚠️ 注意事項
+
+**免費版限制：**
+
+- 每次啟動產生新的隨機網址
+- 有流量限制（每月 1GB）
+- 會顯示 ngrok 警告頁面（訪客需点击繼續）
+
+**付费版好处：**
+
+- 固定的自訂域名
+- 更高流量限制
+- 移除警告頁面
+- 更多並發連接
+
+### 🔒 安全建議
+
+- ngrok 網址是公開的，任何知道網址的人都能存取
+- 不要在公開網址上儲存敏感資料
+- 使用完毕后记得停止服務
+- 如需認證，考虑在應用層新增登入功能
+
+### 🌟 使用場景
+
+- 📱 在手機上測試你的 Web 應用
+- 👥 向客戶或團隊演示專案
+- 🔗 与遠端朋友分享你的作品
+- 🧪 測試 Webhook 回調（如支付网关）
+- 📲 測試社交媒體分享預覽
+
+## 🔌 API 端點
 
 ### Base URL
 
-- 开发环境：`http://localhost:3000/api`
-- 通过 Nginx：`http://localhost:8080/api`
+- 本地存取：`http://localhost:3000/api`
+- ngrok 公開存取：`https://<你的ngrok網址>.ngrok-free.app/api`
 
-### 端点列表
+### 端點列表
 
-#### 获取所有 Todos
+#### 取得所有 Todos
 
 ```http
 GET /api/todos
 ```
 
-**响应示例：**
+**响應示例：**
 
 ```json
 [
@@ -270,7 +357,7 @@ GET /api/todos
 ]
 ```
 
-#### 创建新 Todo
+#### 建立新 Todo
 
 ```http
 POST /api/todos
@@ -278,11 +365,11 @@ Content-Type: application/json
 
 {
   "text": "买菜",
-  "description": "晚上做饭用"  // 可选
+  "description": "晚上做饭用"  // 可選
 }
 ```
 
-**响应：** `201 Created`
+**响應：** `201 Created`
 
 #### 更新 Todo
 
@@ -291,23 +378,23 @@ PUT /api/todos/:id
 Content-Type: application/json
 
 {
-  "text": "买菜和水果",           // 可选
-  "description": "晚上做饭用",    // 可选
-  "completed": true               // 可选
+  "text": "买菜和水果",           // 可選
+  "description": "晚上做饭用",    // 可選
+  "completed": true               // 可選
 }
 ```
 
-**响应：** `200 OK` 或 `404 Not Found`
+**响應：** `200 OK` 或 `404 Not Found`
 
-#### 删除 Todo
+#### 刪除 Todo
 
 ```http
 DELETE /api/todos/:id
 ```
 
-**响应：** `204 No Content` 或 `404 Not Found`
+**响應：** `204 No Content` 或 `404 Not Found`
 
-## 🗄️ 数据库模型
+## 🗄️ 資料庫模型
 
 ```prisma
 model Todo {
@@ -320,15 +407,15 @@ model Todo {
 }
 ```
 
-## 🧪 测试
+## 🧪 測試
 
-### 测试后端 API
+### 測試後端 API
 
 ```bash
-# 获取所有 todos
+# 取得所有 todos
 curl http://localhost:3000/api/todos
 
-# 创建 todo
+# 建立 todo
 curl -X POST http://localhost:3000/api/todos \
   -H "Content-Type: application/json" \
   -d '{"text":"Test Todo","description":"Test description"}'
@@ -338,22 +425,22 @@ curl -X PUT http://localhost:3000/api/todos/1 \
   -H "Content-Type: application/json" \
   -d '{"completed":true}'
 
-# 删除 todo
+# 刪除 todo
 curl -X DELETE http://localhost:3000/api/todos/1
 ```
 
-### 测试前端
+### 測試前端
 
-1. 访问 http://localhost:8080
-2. 创建新的 todo
-3. 切换完成状态
+1. 存取 http://localhost:8080
+2. 建立新的 todo
+3. 切换完成狀態
 4. 点击 todo 展开描述
-5. 删除 todo
-6. 刷新页面确认数据持久化
+5. 刪除 todo
+6. 重新整理頁面确认資料持久化
 
-## 📚 Git Tags 使用说明
+## 📚 Git Tags 使用說明
 
-本项目使用 Git tags 标记每个开发步骤，方便代码审查和学习：
+本專案使用 Git tags 标记每個開發步驟，方便程式碼審查和學習：
 
 ### 查看所有 tags
 
@@ -361,7 +448,7 @@ curl -X DELETE http://localhost:3000/api/todos/1
 git tag -l
 ```
 
-### 输出示例
+### 輸出示例
 
 ```
 step-1-backend-init
@@ -370,18 +457,17 @@ step-3-api-implementation
 step-4-frontend-restructure
 step-5-api-service-layer
 step-6-frontend-integration
-step-7-nginx-config
-step-8-startup-scripts
-step-9-final-testing
+step-7-ngrok-integration
+step-8-final-testing
 ```
 
-### 切换到特定步骤
+### 切换到特定步驟
 
 ```bash
 git checkout step-3-api-implementation
 ```
 
-### 查看 tag 详细信息
+### 查看 tag 詳細資訊
 
 ```bash
 git show step-3-api-implementation
@@ -393,100 +479,117 @@ git show step-3-api-implementation
 git checkout main  # 或 master
 ```
 
-### 各步骤说明
+### 各步驟說明
 
-1. **step-1-backend-init**: 后端项目初始化
-2. **step-2-prisma-setup**: Prisma 和数据库配置
+1. **step-1-backend-init**: 後端專案初始化
+2. **step-2-prisma-setup**: Prisma 和資料庫設定
 3. **step-3-api-implementation**: RESTful API 实现
-4. **step-4-frontend-restructure**: 前端目录重组
-5. **step-5-api-service-layer**: 前端 API 服务层
-6. **step-6-frontend-integration**: 前端后端集成
-7. **step-7-nginx-config**: Nginx 反向代理配置
-8. **step-8-startup-scripts**: 启动脚本
-9. **step-9-final-testing**: 最终测试和文档
+4. **step-4-frontend-restructure**: 前端目錄重組
+5. **step-5-api-service-layer**: 前端 API 服務層
+6. **step-6-frontend-integration**: 前端後端整合
+7. **step-7-ngrok-integration**: ngrok 公網隧道整合
+8. **step-8-final-testing**: 最終測試和檔案
 
-## 🐛 常见问题
+## 🐛 常见問題
 
-### PostgreSQL 连接失败
+### PostgreSQL 連接失敗
 
-**问题：** `Error: connect ECONNREFUSED`
+**問題：** `Error: connect ECONNREFUSED`
 
-**解决：**
+**解決：**
 
 ```bash
-# 启动 PostgreSQL
+# 啟動 PostgreSQL
 brew services start postgresql
 
 # 或
 pg_ctl -D /usr/local/var/postgres start
 ```
 
-### 端口被占用
+### 埠號被佔用
 
-**问题：** `Error: listen EADDRINUSE: address already in use`
+**問題：** `Error: listen EADDRINUSE: address already in use`
 
-**解决：**
+**解決：**
 
 ```bash
-# 查找占用端口的进程
-lsof -i :3000  # 后端
-lsof -i :5173  # 前端
-lsof -i :8080  # Nginx
+# 查找佔用埠號的程式
+lsof -i :3000  # 後端
 
-# 终止进程
+# 終止程式
 kill -9 <PID>
+
+# 或使用停止腳本
+./stop-all.sh
 ```
 
-### Nginx 启动失败
+### ngrok 未安裝
 
-**问题：** `nginx: [emerg] bind() to 0.0.0.0:8080 failed`
+**問題：** `ngrok: command not found`
 
-**解决：**
+**解決：**
 
 ```bash
-# 停止现有 Nginx
-nginx -s stop
+# 使用 Homebrew 安裝
+brew install ngrok/ngrok/ngrok
 
-# 或杀死所有 Nginx 进程
-pkill nginx
+# 或存取官网下载
+# https://ngrok.com/download
+
+# 驗證安裝
+ngrok version
 ```
 
-### 数据库迁移失败
+### ngrok 網址无法存取
 
-**问题：** Prisma 迁移错误
+**問題：** 存取 ngrok 網址时出现錯誤
 
-**解决：**
+**可能原因及解決：**
+
+1. **後端未啟動**：確保 `http://localhost:3000` 可以存取
+2. **ngrok 未認證**（免費版可跳过）：
+   ```bash
+   ngrok config add-authtoken <你的token>
+   ```
+3. **防火墙阻止**：檢查系統防火墙设置
+4. **訪客需点击繼續**：免費版會顯示警告頁面，点击"Visit Site"即可
+
+### 資料庫遷移失敗
+
+**問題：** Prisma 遷移錯誤
+
+**解決：**
 
 ```bash
 cd backend
 
-# 重置数据库（注意：会删除所有数据）
+# 重置資料庫（注意：會刪除所有資料）
 yarn prisma migrate reset
 
-# 重新迁移
+# 重新遷移
 yarn prisma migrate dev --name init
 ```
 
-## 🔧 开发命令
+## 🔧 開發命令
 
-### 后端
+### 後端
 
 ```bash
 cd backend
 
-# 开发模式（热重载）
+# 開發模式（熱重載）
 yarn dev
 
-# 构建
+# 構建
 yarn build
 
-# 生产运行
+# 生产運行
 yarn start
 
 # Prisma 命令
-yarn prisma studio          # 数据库 GUI
-yarn prisma migrate dev     # 创建迁移
-yarn prisma generate        # 生成客户端
+yarn prisma studio          # 資料庫 GUI
+yarn prisma migrate dev     # 建立遷移
+yarn prisma generate        # 產生客戶端
 ```
 
 ### 前端
@@ -494,69 +597,88 @@ yarn prisma generate        # 生成客户端
 ```bash
 cd frontend
 
-# 开发模式
+# 開發模式
 yarn dev
 
-# 构建
+# 構建
 yarn build
 
-# 预览构建
+# 預覽構建
 yarn preview
 
-# 代码检查
+# 程式碼檢查
 yarn lint
 ```
 
 ## 📦 生产部署
 
-### 构建应用
+### 推薦部署平台
+
+**使用 ngrok 仅适合開發和演示，生产環境推薦以下平台：**
+
+1. **Railway** (推薦)
+
+   - 全栈應用 + PostgreSQL
+   - 自動構建和部署
+   - 免費额度：$5/月
+   - 網站：https://railway.app
+
+2. **Render**
+
+   - 前端 + 後端 + 資料庫
+   - 免費版可用（有限制）
+   - 網站：https://render.com
+
+3. **Vercel + Supabase**
+   - Vercel（前端）
+   - Supabase（後端 API + PostgreSQL）
+   - 两者都有免費版
+
+### 本地構建和部署
 
 ```bash
-# 后端
+# 1. 構建前端
+cd frontend
+yarn build
+
+# 2. 構建後端
 cd backend
 yarn build
 
-# 前端
-cd frontend
-yarn build
+# 3. 設定生产環境变量
+# 修改 backend/.env
+NODE_ENV=production
+DATABASE_URL="your-production-database-url"
+PORT=3000
+
+# 4. 使用 PM2 管理程式
+yarn global add pm2
+pm2 start backend/dist/index.js --name todo-backend
+pm2 save
+pm2 startup
 ```
 
-### 配置生产环境
+### ngrok 生产使用（付费版）
 
-1. 修改 `backend/.env`：
+如果需要长期使用 ngrok，建議升级到付费版：
 
-   ```env
-   NODE_ENV=production
-   DATABASE_URL="your-production-database-url"
-   ```
+```bash
+# 使用固定域名
+ngrok http 3000 --domain=your-custom-domain.ngrok.app
+```
 
-2. 配置 Nginx 使用生产构建：
-
-   ```nginx
-   location / {
-       root /path/to/frontend/dist;
-       try_files $uri $uri/ /index.html;
-   }
-   ```
-
-3. 使用 PM2 管理后端进程：
-   ```bash
-   yarn global add pm2
-   pm2 start backend/dist/index.js --name todo-backend
-   ```
-
-## 📝 授权
+## 📝 授權
 
 MIT License
 
-## 👥 贡献
+## 👥 貢獻
 
-欢迎提交 Pull Request 或 Issue！
+歡迎提交 Pull Request 或 Issue！
 
-## 📞 联系方式
+## 📞 聯絡方式
 
-如有问题，请创建 GitHub Issue。
+如有問題，請建立 GitHub Issue。
 
 ---
 
-⭐ 如果这个项目对您有帮助，请给一个 Star！
+⭐ 如果這個專案对您有幫助，請給一个 Star！

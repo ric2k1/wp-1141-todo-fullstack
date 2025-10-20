@@ -2,9 +2,14 @@ import express, { Request, Response } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { PrismaClient } from '@prisma/client';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import todoRoutes from './routes/todoRoutes.js';
 
 dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -14,17 +19,18 @@ const prisma = new PrismaClient();
 app.use(cors());
 app.use(express.json());
 
-// Basic health check route
-app.get('/', (req: Request, res: Response) => {
-  res.json({ 
-    message: 'Todo API Server', 
-    status: 'running',
-    timestamp: new Date().toISOString()
-  });
-});
-
-// API Routes
+// API Routes (must be before static files)
 app.use('/api', todoRoutes);
+
+// Serve static files from frontend build
+// __dirname points to backend/src/, so we go up 2 levels to reach todo-fullstack/
+const frontendDistPath = path.join(__dirname, '../../frontend/dist');
+app.use(express.static(frontendDistPath));
+
+// Serve index.html for all non-API routes (SPA support)
+app.get('*', (req: Request, res: Response) => {
+  res.sendFile(path.join(frontendDistPath, 'index.html'));
+});
 
 // Test database connection
 async function connectDatabase() {
