@@ -106,3 +106,6 @@ temp/
 *.njsproj
 *.sln
 *.sw?
+
+# Documentation files
+TYPESCRIPT_MIGRATION.md
